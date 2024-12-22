@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netcoreapp8.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Description>A Marten implementation of the ASP.NET Core Identity stores.</Description>
 		<PackageProjectUrl>https://github.com/roadkillwiki/Marten.AspNetIdentity</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/yetanotherchris/MartenAspNetIdentity</RepositoryUrl>
