@@ -36,10 +36,15 @@ namespace Marten.AspNetIdentity
 
 		public void Wipe()
 		{
-			using (IDocumentSession session = _documentStore.OpenSession())
+			WipeAsync().GetAwaiter().GetResult();
+		}
+
+		public async Task WipeAsync()
+		{
+			using (IDocumentSession session = _documentStore.LightweightSession())
 			{
 				session.DeleteWhere<TUser>(x => true);
-				session.SaveChanges();
+				await session.SaveChangesAsync();
 			}
 		}
 
@@ -82,7 +87,7 @@ namespace Marten.AspNetIdentity
 
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Store(user);
 					await session.SaveChangesAsync(cancellationToken);
@@ -100,7 +105,7 @@ namespace Marten.AspNetIdentity
 		{
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Update(user);
 					await session.SaveChangesAsync(cancellationToken);
@@ -118,7 +123,7 @@ namespace Marten.AspNetIdentity
 		{
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Delete(user);
 					await session.SaveChangesAsync(cancellationToken);
@@ -316,7 +321,7 @@ namespace Marten.AspNetIdentity
 
 				user.RoleClaims = userRoleClaims;
 
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Store(user);
 					await session.SaveChangesAsync(cancellationToken);

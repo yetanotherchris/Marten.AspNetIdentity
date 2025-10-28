@@ -331,3 +331,4 @@ ASALocalRun/
 
 .vscode/
 .vs/
+.claude/settings.local.json

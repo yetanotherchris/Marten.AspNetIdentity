@@ -1,0 +1,21 @@
+<Project>
+	<PropertyGroup>
+		<!-- Common properties for all projects -->
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<!-- Package metadata for library projects -->
+	<PropertyGroup Condition="'$(IsPackable)' == 'true'">
+		<Authors>Chris Small</Authors>
+		<Company />
+		<Description>A Marten implementation of the ASP.NET Core Identity stores.</Description>
+		<PackageProjectUrl>https://github.com/roadkillwiki/Marten.AspNetIdentity</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/yetanotherchris/MartenAspNetIdentity</RepositoryUrl>
+		<PackageTags>marten aspnetidentity</PackageTags>
+		<PackageIconUrl>http://jasperfx.github.io/marten/content/images/emblem.png</PackageIconUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+</Project>
