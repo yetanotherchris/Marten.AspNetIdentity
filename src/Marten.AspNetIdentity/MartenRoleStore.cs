@@ -36,7 +36,7 @@ namespace Marten.AspNetIdentity
 		{
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Store(role);
 					await session.SaveChangesAsync(cancellationToken);
@@ -55,7 +55,7 @@ namespace Marten.AspNetIdentity
 		{
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Update(role);
 					await session.SaveChangesAsync(cancellationToken);
@@ -74,7 +74,7 @@ namespace Marten.AspNetIdentity
 		{
 			try
 			{
-				using (IDocumentSession session = _documentStore.OpenSession())
+				using (IDocumentSession session = _documentStore.LightweightSession())
 				{
 					session.Delete(role);
 					await session.SaveChangesAsync(cancellationToken);
