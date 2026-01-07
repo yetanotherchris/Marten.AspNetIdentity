@@ -6,7 +6,7 @@ MartenAspNetIdentity is a [Marten DocumentDb](http://jasperfx.github.io/marten/)
 
 ## Example usage
 
-```
+```csharp
 // This method gets called by the runtime. Use this method to add services to the container.
 public void ConfigureServices(IServiceCollection services)
 {
@@ -27,7 +27,7 @@ public void ConfigureServices(IServiceCollection services)
 
 This will create an `IDocumentStore` for you, create a database and using the connection string provided, and add it to your services. If you already have an `IDocumentStore` configured in your DI container, you can use the overload without the connection string, the MartenAspNetIdentity will use this for its managers:
 
-```
+```csharp
 services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddMartenStores<ApplicationUser, IdentityRole>()
         .AddDefaultTokenProviders();
