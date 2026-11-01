@@ -7,8 +7,6 @@ on:
     paths-ignore:
       - '**/*.md'
       - '**/*.gitignore'
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
