@@ -2,7 +2,9 @@
 
 # MartenAspNetIdentity
 
-MartenAspNetIdentity is a [Marten DocumentDb](http://jasperfx.github.io/marten/) implementation of [Microsoft.AspNetCore.Identity](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity?view=aspnetcore-2.1).
+MartenAspNetIdentity is a [Marten DocumentDb](http://jasperfx.github.io/marten/) implementation of [Microsoft.AspNetCore.Identity](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity?view=aspnetcore-10.0).
+
+It is available for .NET 9 and .NET 10.
 
 ## Example usage
 
