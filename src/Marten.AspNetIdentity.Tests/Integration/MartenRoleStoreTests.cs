@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
+using Marten.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging.Abstractions;
 using Shouldly;
@@ -122,7 +123,7 @@ namespace Marten.AspNetIdentity.Tests.Integration
 			IdentityRole expectedRole = roles.First();
 
 			// when
-			IdentityRole actualRole = _roleStore.Roles.First(x => x.Id == expectedRole.Id);
+			IdentityRole actualRole = await _roleStore.Roles.FirstAsync(x => x.Id == expectedRole.Id);
 
 			// then
 			actualRole.ShouldNotBeNull();
