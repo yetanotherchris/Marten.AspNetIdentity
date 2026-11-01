@@ -11,10 +11,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     env:
       VERSION_NUMBER: "9.0"
       PR_NUMBER: ${{ github.event.number }}
-      NUGET_KEY: ${{ secrets.NUGET_KEY }}
 
     steps:
       - name: Git - check out repository code
@@ -37,16 +39,23 @@ jobs:
       - name: .NET - test
         run: dotnet test 
 
+      - name: NuGet login
+        if: github.actor == github.repository_owner && (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: mrshrinkray
+
       - name: Nuget - push PR package
         if: github.event_name == 'pull_request' && github.actor == github.repository_owner
         run: |
           export PACKAGE_VERSION="$VERSION_NUMBER.$GITHUB_RUN_NUMBER-pr-$PR_NUMBER"
           dotnet pack -c Release /p:PackageVersion=$PACKAGE_VERSION
-          dotnet nuget push "src/Marten.AspNetIdentity/bin/Release/Marten.AspNetIdentity.$PACKAGE_VERSION.nupkg" --api-key "$NUGET_KEY" --source https://api.nuget.org/v3/index.json
+          dotnet nuget push "src/Marten.AspNetIdentity/bin/Release/Marten.AspNetIdentity.$PACKAGE_VERSION.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
 
       - name: Nuget - push master package
         if: github.event_name != 'pull_request' && github.actor == github.repository_owner
         run: |
           export PACKAGE_VERSION="$VERSION_NUMBER.$GITHUB_RUN_NUMBER"
           dotnet pack -c Release /p:PackageVersion=$PACKAGE_VERSION
-          dotnet nuget push "src/Marten.AspNetIdentity/bin/Release/Marten.AspNetIdentity.$PACKAGE_VERSION.nupkg" --api-key "$NUGET_KEY" --source https://api.nuget.org/v3/index.json
+          dotnet nuget push "src/Marten.AspNetIdentity/bin/Release/Marten.AspNetIdentity.$PACKAGE_VERSION.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json

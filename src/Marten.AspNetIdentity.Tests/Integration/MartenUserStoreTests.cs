@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
+using Marten.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging.Abstractions;
 using Shouldly;
@@ -134,7 +135,7 @@ namespace Marten.AspNetIdentity.Tests.Integration
 			TestUser testUser = testUsers.First();
 
 			// when
-			TestUser actualUser = _userStore.Users.First(x => x.Id == testUser.Id);
+			TestUser actualUser = await _userStore.Users.FirstAsync(x => x.Id == testUser.Id);
 
 			// then
 			actualUser.ShouldNotBeNull();
